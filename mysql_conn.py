@@ -1,1 +1,1 @@
-password = 'eAVuM6bo4LgR'
+password = 'INSERT SERVER PASSWORD'
