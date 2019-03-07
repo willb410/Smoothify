@@ -2,6 +2,15 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from connections import client_id, client_secret
 
+from sqlalchemy import create_engine
+from sqlalchemy import types
+import pymysql
+pymysql.install_as_MySQLdb()
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+
+from connections import password, client_id, client_secret
+
 import pandas as pd
 import numpy as np
 
