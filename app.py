@@ -1,23 +1,37 @@
-'''this is just a blank app that does nothing, just to test the flask template'''
+# Set the file path to run Flask app
+import os
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
+from flask import Flask, jsonify, render_template, request, redirect
+import requests
+import sys
+sys.path.append("static/js")
+sys.path.append("static/css")
+sys.path.append("static/Images")
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from flask import Flask, jsonify, render_template, request, redirect
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from connections import password, client_id, client_secret
-import numpy as np
 import pymysql
 pymysql.install_as_MySQLdb()
-import requests
+
+import numpy as np
 import pandas as pd
-import sys
+
+from keras.models import load_model
+
 import song_id_search
-import song_features
-sys.path.append("static/js")
-sys.path.append("static/css")
-sys.path.append("static/Images")
+from song_features import feature_pull_df
+from Run_Model import run_model
+from connections import password, client_id, client_secret
+
+
+# Load Model
+top_model = load_model("Feature_Model_Trained.h5")
 
 #################################################
 # Flask Setup
@@ -40,9 +54,16 @@ def send():
 
 @app.route("/<song_id>")
 def get_features(song_id):
-    features = song_features.pull(song_id)
+    features = feature_pull_df(song_id)
     return render_template("index.html", features=features)
+
+@app.route("/feature_test")
+def feat():
+    # Run model
+    prediction = run_model('5J5PXmMdQ2nh1lZOal8KmK', model = top_model)
+    print(f" THIS IS THE PREDICTION: {prediction}")
+    return jsonify(prediction)
 
 #  Define main behavior
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug = False, threaded = False)

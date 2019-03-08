@@ -16,10 +16,6 @@ from keras.models import load_model
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import sys
-import song_id_search
-from song_features import feature_pull_df
-from Run_Model import run_model
-# from keras import backend as K 
 sys.path.append("static/js")
 sys.path.append("static/css")
 sys.path.append("static/Images")
@@ -30,10 +26,6 @@ client_credentials_manager = SpotifyClientCredentials(
     client_id=client_id, 
     client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
-# Load Model
-top_model = load_model("Feature_Model_Trained.h5")
-# K.clear_session()
 
 #################################################
 # Flask Setup
@@ -46,23 +38,14 @@ def apps():
     
     return render_template("index.html")
 
-@app.route("/feature_test")
-def feat():
-    # K.clear_session()
-    # Run model
-    prediction = run_model('5J5PXmMdQ2nh1lZOal8KmK', model = top_model)
-    print(f" THIS IS THE PREDICTION: {prediction}")
-    return jsonify(prediction)
+@app.route("/model")
+def model():
+    top_model = load_model("Feature_Model_Trained.h5")
 
-
-# @app.route("/model")
-# def model():
-#     top_model = load_model("Feature_Model_Trained.h5")
-
-    # sp.audio_features('06AKEBrKUckW0KREUWRnvT')
+    sp.audio_features('06AKEBrKUckW0KREUWRnvT')
 
 
 
 #  Define main behavior
 if __name__ == "__main__":
-    app.run(debug = True, threaded = False)
+    app.run(debug=True)

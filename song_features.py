@@ -1,8 +1,50 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+
 from connections import password, client_id, client_secret
-#from flask import Flask, jsonify,render_template
-import json
+import song_id_search
+import song_features
+
+import pandas as pd
+
+def feature_pull_df(ids = []):
+    ''' Ready to be processed for model '''
+    client_credentials_manager = SpotifyClientCredentials(
+    client_id = client_id, 
+    client_secret = client_secret)
+    sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+
+        
+    id_list = ids
+    # Divide list of Ids into chunks of 100
+    def chunk_lists(list, n = 100): 
+        for i in range(0, len(list), n):  
+            yield list[i:i + n] 
+    # Must wrap output in list()
+    id_chunks = list(chunk_lists(id_list))
+
+
+    audio_features = []
+    for ids in id_chunks:
+        audio_feature = sp.audio_features(tracks = ids)
+
+        audio_features.append(audio_feature)
+
+    # Remove sublists
+    audio_features = [item for sublist in audio_features for item in sublist]
+
+
+    # Delete irrelevant categories
+    unrel_keys = ['id', 'type', 'uri', 'analysis_url', 'track_href']
+    for dict in audio_features:
+        for key in unrel_keys:
+            if key in dict:
+                del dict[key]
+
+
+    features_df = pd.DataFrame(audio_features)
+
+    return features_df
 
 def pull(id):
     features = {}
