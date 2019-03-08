@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Spotify Top Hits</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="static/img/favicon.png" rel="icon">
+  <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- New files to get glyphicon-->
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+  <!-- Libraries CSS Files -->
+  <link href="static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="static/lib/animate/animate.min.css" rel="stylesheet">
+  <link href="static/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="static/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="static/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+    Theme Name: BizPage
+    Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container-fluid">
+
+      <div id="logo" class="pull-left">
+        <h1><a href="#intro" class="scrollto">Spotify Hits</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#intro">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <!-- <li><a href="#services">Projects</a></li> -->
+          <!--<li><a href="#portfolio">Portfolio</a></li>-->
+          <!--<li><a href="#team">The Smooths</a></li>-->
+          <!-- <li class="menu-has-children"><a href="">Drop down</a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="#">Drop Down 5</a></li>
+            </ul>
+          </li> -->
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Intro Section
+  ============================-->
+      {% if songs %}
+
+        {% else %}
+  <section id="intro">
+
+    <div class="intro-container">
+        
+      <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+        <ol class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active">
+            <div class="carousel-background"><img src="{{url_for('static',filename='img/intro-carousel/datacoding.jpg')}}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>What makes a hit?</h2>
+                <p>Use our trained data model to see how likely a song is to join the ranks of the Spotify Viral Hits playlist.</p>
+                <a href="#featured-services" class="btn-get-started scrollto">Try it Now!</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="{{url_for('static',filename='img/intro-carousel/albumartone.jpg')}}" alt=" "></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Behind the Music</h2>
+                <p>Curious about what went into this project? Take a look at the workflow and resources involved.</p>
+                <a href="#team-info" class="btn-get-started scrollto">Contact Us</a>
+              </div>
+            </div>
+          </div>
+
+
+        <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- #intro -->
+  {% endif %}
+  <!-- <div class="active-cyan-4 mb-4">
+    <input class="form-control" type="text" placeholder="Song Title" aria-label="Search">
+   </div> -->
+   <div>
+<!--     <form class="form-inline mr-auto" method="POST" action="/send">
+    <input class="form-control mr-sm-2" id="songtitle" type="text" placeholder="Song Title" aria-label="Search">
+    <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit" id="songsearch">Search</button>
+    </form> -->
+
+  <form id="featured-services" method="POST" action="/send">
+
+      <label for="songTitle"></label>
+      <input type="text" id="songTitle" name="song" placeholder="Enter a song title here">
+  
+      <input type="submit" value="submit">
+  </form>
+
+    <tbody style="padding-top: 100px" id="searchresults">
+      {% if songs %}
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p>Select your song from the list below:</p>
+      <ul>
+        {% for song in songs %}
+        <li><a href="/{{ song.id }}">{{ song.name }} by {{ song.artist }}</a></li>
+        {% endfor %}
+      </ul>
+      {% else %}
+<!--         <li>No Results</li> -->
+      {% endif %}
+    </tbody>
+  </div>
+  {% if features %}
+    <!--==========================
+      Skills Section
+    ============================-->
+    <section id="skills">
+        <div class="container">
+  
+          <header class="section-header">
+            <h3>RESULTS</h3>
+            <p>Prediction for this song becoming a hit:</p>
+          </header>
+  
+          <div class="skills-content">
+  
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  <span class="skill" id="songname">Thriller<i id="prediction" class="val">80%</i></span>
+                </div>
+              </div>
+          </div>
+  
+        </div>
+      </section>
+  <main id="main">
+
+  <table class="table table-sm table-dark">
+    <thead>
+      <tr>
+        <th class="bg-success" scope="col">Feature</th>
+        <th class="bg-success" scope="col">Description</th>
+        <th class="bg-success" scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>duration_ms</td>
+        <td>The duration of the track in milliseconds.</td>
+        <td>{{ features.duration_ms }}</td>
+      </tr>
+      <tr>
+        <td>key</td>
+        <td>The estimated overall key of the track. Integers map to pitches using standard Pitch Class notation . E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on. If no key was detected, the value is -1.</td>
+        <td>{{ features.key }}</td>
+      </tr>
+      <tr>
+        <td>mode</td>
+        <td>Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic content is derived. Major is represented by 1 and minor is 0.</td>
+        <td>{{ features.mode }}</td>
+      </tr>
+      <tr>
+        <td>time_signature</td>
+        <td>An estimated overall time signature of a track. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).</td>
+        <td>{{ features.time_signature }}</td>
+      </tr>
+      <tr>
+        <td>acousticness</td>
+        <td>A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</td>
+        <td>{{ features.acousticness }}</td>
+      </tr>
+      <tr>
+        <td>danceability</td>
+        <td>Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable. </td>
+        <td>{{ features.danceability }}</td>
+      </tr>
+
+      <tr>
+        <td>energy</td>
+        <td>Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy. </td>
+        <td>{{ features.energy }}</td>
+      </tr>
+      <tr>
+        <td>instrumentalness</td>
+        <td>Predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0. </td>
+        <td>{{ features.instrumentalness }}</td>
+      </tr>
+      <tr>
+        <td>liveness</td>
+        <td>Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.</td>
+        <td>{{ features.liveness }}</td>
+      </tr>
+      <tr>
+        <td>loudness</td>
+        <td>The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typical range between -60 and 0 db.</td>
+        <td>{{ features.loudness }}</td>
+      </tr>
+      <tr>
+        <td>speechiness</td>
+        <td>Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks. </td>
+        <td>{{ features.speechiness }}</td>
+      </tr>
+      <tr>
+        <td>valence</td>
+        <td>A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).</td>
+        <td>{{ features.valence }}</td>
+      </tr>
+      <tr>
+        <td>tempo</td>
+        <td>The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration. </td>
+        <td>{{ features.tempo }}</td>
+      </tr>
+      <tr>
+        <td><button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.">
+            tempo 
+           </button></td>
+          <td>{{ features.tempo }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% endif %}
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+
+        <header class="section-header" id="team-info">
+          <h3>Behind the Music</h3>
+          <p>
+            This project was an opportunity for our group to apply various programming tools and showcase possible application for machine learning.
+          </p>
+          <p>
+            
+          </p>
+        </header>
+
+        <div class="row about-cols">
+
+          <div class="col-md-4 wow fadeInUp">
+            <div class="about-col">
+              <div class="img">
+                <img src="{{url_for('static',filename='img/mission.jpg')}}" alt="" class="img-fluid">
+                <div class="icon"><i class="ion-ios-speedometer-outline"></i></div>
+              </div>
+              <h2 class="title"><a href="#">Ski Kit Learn</a></h2>
+              <p>
+                Our data model was trained to identify common feature patterns amond known hit songs.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="about-col">
+              <div class="img">
+                <img src="{{url_for('static',filename='img/viralmusic.jpg')}}" alt="" class="img-fluid">
+                <div class="icon"><i class="ion-ios-list-outline"></i></div>
+              </div>
+              <h2 class="title"><a href="#">Spotipy</a></h2>
+              <p>
+                We utilized the Spotify API to retrieve song information.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="about-col">
+              <div class="img">
+                <img src="{{url_for('static',filename='img/goal.jpg')}}" alt="" class="img-fluid">
+                <div class="icon"><i class="ion-ios-eye-outline"></i></div>
+              </div>
+              <h2 class="title"><a href="#">Flask</a></h2>
+              <p>
+                Using our trained data model, song information was evaluated to determine the final result.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- #about -->
+
+  </main>
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-info">
+            <h3>Spotify Hits</h3>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Home</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">About us</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="https://github.com/willb410/Smoothify">GitHub</a></li>
+              <!--<li><i class="ion-ios-arrow-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Privacy policy</a></li>-->
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p><a href="mailto:rico_medford@live.com">Rico : rico_medford@live.com</a>
+            </br>
+              <a href="mailto:jcherepow@gmail.com">Jackie : jcherepow@gmail.com</a>
+            </br>
+              <a href="mailto:willb410@gmail.com">Will: willb410@gmail.com</a>
+            </br>
+
+
+           <!--<p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>--> 
+
+            <div class="social-links">
+              <a href="https://twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="https://www.facebook.com/" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="https://www.instagram.com/" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="https://plus.google.com/discover" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="https://www.linkedin.com/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+          </div>
+
+          <!--<div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit"  value="Subscribe">
+            </form>
+          </div>--> 
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>The Smooths</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+        -->
+        <!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
+
+  <!-- JavaScript Libraries -->
+  <script src="static/lib/jquery/jquery.min.js"></script>
+  <script src="static/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="static/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/lib/easing/easing.min.js"></script>
+  <script src="static/lib/superfish/hoverIntent.js"></script>
+  <script src="static/lib/superfish/superfish.min.js"></script>
+  <script src="static/lib/wow/wow.min.js"></script>
+  <script src="static/lib/waypoints/waypoints.min.js"></script>
+  <script src="static/lib/counterup/counterup.min.js"></script>
+  <script src="static/lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="static/lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="static/lib/lightbox/js/lightbox.min.js"></script>
+  <script src="static/lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="static/contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="static/js/main.js"></script>
+
+    <!-- Javascript File -->
+<!--     <script src="static/js/app.js"></script> -->
+<script type="text/javascript">
+$(function () {
+ $('[data-toggle="popover"]').popover()
+})
+</script>
+</body>
+
+</html>
