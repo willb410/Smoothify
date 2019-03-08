@@ -67,3 +67,4 @@ def feat():
 #  Define main behavior
 if __name__ == "__main__":
     app.run(debug = False, threaded = False)
+''' debug and threaded set to False to properly run model'''
