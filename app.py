@@ -25,7 +25,7 @@ import pandas as pd
 from keras.models import load_model
 
 import song_id_search
-from song_features import feature_pull_df
+from song_features import pull, feature_pull_df
 from Run_Model import run_model
 from connections import password, client_id, client_secret
 
@@ -54,15 +54,13 @@ def send():
 
 @app.route("/<song_id>")
 def get_features(song_id):
-    features = feature_pull_df(song_id)
-    return render_template("index.html", features=features)
-
-@app.route("/feature_test")
-def feat():
+    features = pull(song_id)
+    
     # Run model
-    prediction = run_model('5J5PXmMdQ2nh1lZOal8KmK', model = top_model)
+    prediction = run_model(song_id, model = top_model)
     print(f" THIS IS THE PREDICTION: {prediction}")
-    return jsonify(prediction)
+    
+    return render_template("index.html", features=features)
 
 #  Define main behavior
 if __name__ == "__main__":
