@@ -1,5 +1,5 @@
 #spot_db
-password = 'eAVuM6bo4LgR'
+password = 'password'
 
 # spotify API
 client_id='7b0e5ed233304809ae9933fd28fb4ee8'
