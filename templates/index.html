@@ -171,6 +171,21 @@
             {% endif %}
             </p>
           </header>
+          {% if features %}
+            <p>Have a playlist you think this track should be on? Enter the playlist title and Spotify display name below!</p>
+            <div>
+            <form method="POST" action="/playlist" role="form", name="petform">
+              <div class="form-group">
+                  <label for="inputName"></label>
+                  <input type="text" class="form-control" id="playlistName" name="playlistName" placeholder="Enter the name of your playlist">
+              </div>
+              <div class="form-group">
+                  <label for="inputName"></label>
+                  <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter your user name">
+              </div>
+              <input type="submit" value="submit" class="btn btn-default">
+            </form></div>
+            {% endif %}
           <table class="table table-sm table-dark">
               <thead>
                 <tr>
@@ -259,20 +274,7 @@
                 </tr>
               </tbody>
             </table>
-  {% if features %}
-  <div>
-  <form method="POST" action="/playlist" role="form", name="petform">
-    <div class="form-group">
-        <label for="inputName"></label>
-        <input type="text" class="form-control" id="playlistName" name="playlistName" placeholder="Enter the name of your playlist">
-    </div>
-    <div class="form-group">
-        <label for="inputName"></label>
-        <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter your user name">
-    </div>
-    <input type="submit" value="submit" class="btn btn-default">
-</form></div>
-  {% endif %}
+  
 
       </div>
     </section>

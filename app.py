@@ -3,6 +3,7 @@ import os
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
+
 from flask import Flask, jsonify, render_template, request, redirect
 import requests
 import sys
@@ -10,16 +11,12 @@ sys.path.append("static/js")
 sys.path.append("static/css")
 sys.path.append("static/Images")
 sys.path.append("static/img")
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-import pymysql
-pymysql.install_as_MySQLdb()
+
 import numpy as np
 import pandas as pd
+
 from keras.models import load_model
+
 import song_id_search
 from song_features import pull, feature_pull_df
 from Run_Model import run_model

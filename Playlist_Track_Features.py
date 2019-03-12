@@ -16,7 +16,7 @@ def playlist_track_features(playlist, display_name):
     sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
     # Search for the specified playlist by name
-    p_list = sp.search(q = playlist, type = 'playlist')
+    p_list = sp.search(q = playlist, type = 'playlist', limit = 50)
     
     # Iterate through each search result to find ids playlist matching display name 
     for i in range(0, len(p_list['playlists']['items'])):
