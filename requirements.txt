@@ -1,3 +1,4 @@
+pyodbc
 pywinpty==0.5.1
 PyYAML==3.12
 pyzmq==17.0.0
