@@ -43,7 +43,7 @@ def send():
         if len(song) > 0:
             songs = song_id_search.identify(song)
         else:
-            return render_template("index.html", songs=songs)
+            return render_template("index.html", songs="err1")
 
     return render_template("index.html", songs=songs)
 
