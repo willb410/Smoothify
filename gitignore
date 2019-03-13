@@ -1,4 +1,4 @@
 mysql_conn.py
 connections.py
 __pycache__
-.pyc
+*.pyc
