@@ -1,8 +1,8 @@
 # Set the file path to run Flask app
 import os
-# abspath = os.path.abspath(__file__)
-# dname = os.path.dirname(abspath)
-# os.chdir(dname)
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 from flask import Flask, jsonify, render_template, request, redirect
 import requests
@@ -68,7 +68,10 @@ def playlist():
         playlist = request.form["playlistName"]
         user = request.form["userName"]
         if (len(playlist) > 0) and (len(user) > 0):
-            fit_result = playlist_model(playlist, user, track)
+            try:
+                fit_result = playlist_model(playlist, user, track)
+            except:
+                fit_result = "err2"
         else:
             fit_result = "err1"
 

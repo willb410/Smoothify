@@ -280,18 +280,20 @@
     </section>
 <main id="main">
 {% endif %}
-
-<div>{% if fit_result == 1 %}
+<div>
+  {% if fit_result == "err1" %}
+    <p>Insufficient search parameters entered; please try again</p>
+  {% elif fit_result == "err2" %}
+    <p>No results; please try again</p>
+    <font size="-1">Note: Spotify only indexes active playlists</font>
+  {% elif fit_result == 1 %}
     <img src="{{url_for('static',filename='img/thumbsup.gif')}}" alt="" class="img-fluid">
     <p>{{ song_dict.name }} by {{ song_dict.artist }} appears to be a <strong>good</strong> fit for your playlist!</p>
-{% elif fit_result == 0 %}
-  <img src="{{url_for('static',filename='img/thumbsdown.gif')}}" alt="" class="img-fluid">
-  <p>{{ song_dict.name }} by {{ song_dict.artist }} does <strong>not</strong> appear to be a good fit for your playlist</p>
-{% elif fit_result == "err1" %}
-  <p>Insufficient search parameters entered; please try again</p>
-{% elif fit_result == "err2" %}
-  <p>No results; please try again</p>
-{% endif %}</div>
+  {% elif fit_result == 0 %}
+    <img src="{{url_for('static',filename='img/thumbsdown.gif')}}" alt="" class="img-fluid">
+    <p>{{ song_dict.name }} by {{ song_dict.artist }} does <strong>not</strong> appear to be a good fit for your playlist</p>
+  {% endif %}
+</div>
     <!--==========================
       About Us Section
     ============================-->
