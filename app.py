@@ -1,8 +1,8 @@
 # Set the file path to run Flask app
 import os
-# abspath = os.path.abspath(__file__)
-# dname = os.path.dirname(abspath)
-# os.chdir(dname)
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 from flask import Flask, jsonify, render_template, request, redirect
 import requests
